@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2d1eb71ff7ba468fb293652272818b1e" Name="Diagram1">
+        <EntityTypeShape EntityType="LDBModel.Course" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LDBModel.Subject" Width="1.5" PointX="3.875" PointY="0.75" />
+        <AssociationConnector Association="LDBModel.FK__Subject__CourseI__4CA06362" />
+        <EntityTypeShape EntityType="LDBModel.Student" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="LDBModel.SubjectStudent" Width="1.5" PointX="7.5" PointY="3.75" />
+        <EntityTypeShape EntityType="LDBModel.Teacher" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="LDBModel.User" Width="1.5" PointX="0.75" PointY="4" />
+        <AssociationConnector Association="LDBModel.FK__Student__UserId__5441852A" />
+        <AssociationConnector Association="LDBModel.FK__SubjectSt__Stude__6477ECF3" />
+        <AssociationConnector Association="LDBModel.FK__Subject__Teacher__59063A47" />
+        <AssociationConnector Association="LDBModel.FK__SubjectSt__Subje__6383C8BA" />
+        <AssociationConnector Association="LDBModel.FK__Teacher__UserId__5165187F" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

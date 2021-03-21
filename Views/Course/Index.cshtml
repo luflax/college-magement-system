@@ -1,0 +1,13 @@
+﻿<div class="container" ng-controller="courseController">
+    <div ng-repeat="course in Courses">
+        <span>{{course.Id}}</span>
+        <span>{{course.Name}}</span>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/App/Course/Module.js"></script>
+    <script src="~/App/Course/Service.js"></script>
+    <script src="~/App/Course/Controller.js"></script>
+}

@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RegistrationNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="TeacherId" Type="int" />
+        </EntityType>
+        <EntityType Name="SubjectStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="int" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="money" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK__Student__UserId__5441852A">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__CourseI__5812160E">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Teacher__59063A47">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubjectSt__Stude__6477ECF3">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="SubjectStudent" Type="Self.SubjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectStudent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubjectSt__Subje__6383C8BA">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="SubjectStudent" Type="Self.SubjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectStudent">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__UserId__5165187F">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LDBModelStoreContainer">
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectStudent" EntityType="Self.SubjectStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Student__UserId__5441852A" Association="Self.FK__Student__UserId__5441852A">
+            <End Role="User" EntitySet="User" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__CourseI__5812160E" Association="Self.FK__Subject__CourseI__5812160E">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Teacher__59063A47" Association="Self.FK__Subject__Teacher__59063A47">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubjectSt__Stude__6477ECF3" Association="Self.FK__SubjectSt__Stude__6477ECF3">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="SubjectStudent" EntitySet="SubjectStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubjectSt__Subje__6383C8BA" Association="Self.FK__SubjectSt__Subje__6383C8BA">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="SubjectStudent" EntitySet="SubjectStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__UserId__5165187F" Association="Self.FK__Teacher__UserId__5165187F">
+            <End Role="User" EntitySet="User" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subjects" Relationship="LDBModel.FK__Subject__CourseI__4CA06362" FromRole="Course" ToRole="Subject" />
+        </EntityType>
+        <EntityContainer Name="LDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Subjects" EntityType="LDBModel.Subject" />
+          <AssociationSet Name="FK__Subject__CourseI__4CA06362" Association="LDBModel.FK__Subject__CourseI__4CA06362">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <EntitySet Name="Students" EntityType="LDBModel.Student" />
+          <EntitySet Name="SubjectStudents" EntityType="LDBModel.SubjectStudent" />
+          <EntitySet Name="Teachers" EntityType="LDBModel.Teacher" />
+          <EntitySet Name="Users" EntityType="LDBModel.User" />
+          <AssociationSet Name="FK__Student__UserId__5441852A" Association="LDBModel.FK__Student__UserId__5441852A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubjectSt__Stude__6477ECF3" Association="LDBModel.FK__SubjectSt__Stude__6477ECF3">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="SubjectStudent" EntitySet="SubjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Teacher__59063A47" Association="LDBModel.FK__Subject__Teacher__59063A47">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubjectSt__Subje__6383C8BA" Association="LDBModel.FK__SubjectSt__Subje__6383C8BA">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="SubjectStudent" EntitySet="SubjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__UserId__5165187F" Association="LDBModel.FK__Teacher__UserId__5165187F">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="ComplexType1">
+          <Property Type="String" Name="Birthday" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="LDBModel.FK__Subject__CourseI__4CA06362" FromRole="Subject" ToRole="Course" />
+          <Property Name="TeacherId" Type="Int32" />
+          <NavigationProperty Name="Teacher" Relationship="LDBModel.FK__Subject__Teacher__59063A47" FromRole="Subject" ToRole="Teacher" />
+          <NavigationProperty Name="SubjectStudents" Relationship="LDBModel.FK__SubjectSt__Subje__6383C8BA" FromRole="Subject" ToRole="SubjectStudent" />
+        </EntityType>
+        <Association Name="FK__Subject__CourseI__4CA06362">
+          <End Type="LDBModel.Course" Role="Course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LDBModel.Subject" Role="Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationNumber" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="LDBModel.FK__Student__UserId__5441852A" FromRole="Student" ToRole="User" />
+          <NavigationProperty Name="SubjectStudents" Relationship="LDBModel.FK__SubjectSt__Stude__6477ECF3" FromRole="Student" ToRole="SubjectStudent" />
+        </EntityType>
+        <EntityType Name="SubjectStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="LDBModel.FK__SubjectSt__Stude__6477ECF3" FromRole="SubjectStudent" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="LDBModel.FK__SubjectSt__Subje__6383C8BA" FromRole="SubjectStudent" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Subjects" Relationship="LDBModel.FK__Subject__Teacher__59063A47" FromRole="Teacher" ToRole="Subject" />
+          <NavigationProperty Name="User" Relationship="LDBModel.FK__Teacher__UserId__5165187F" FromRole="Teacher" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Students" Relationship="LDBModel.FK__Student__UserId__5441852A" FromRole="User" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="LDBModel.FK__Teacher__UserId__5165187F" FromRole="User" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK__Student__UserId__5441852A">
+          <End Type="LDBModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LDBModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubjectSt__Stude__6477ECF3">
+          <End Type="LDBModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="LDBModel.SubjectStudent" Role="SubjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectStudent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Teacher__59063A47">
+          <End Type="LDBModel.Teacher" Role="Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LDBModel.Subject" Role="Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubjectSt__Subje__6383C8BA">
+          <End Type="LDBModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="LDBModel.SubjectStudent" Role="SubjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectStudent">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__UserId__5165187F">
+          <End Type="LDBModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LDBModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LDBModelStoreContainer" CdmEntityContainer="LDBEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="LDBModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="LDBModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="LDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectStudents">
+            <EntityTypeMapping TypeName="LDBModel.SubjectStudent">
+              <MappingFragment StoreEntitySet="SubjectStudent">
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="LDBModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
