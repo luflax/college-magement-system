@@ -28,50 +28,58 @@ textarea { max-width: 280px; }
     background-color: #191F72;
 }
 
-    .topbar .menu-button {
-        background-color: #2A2F85;
-        cursor: pointer;
-    }
+.topbar .menu-button {
+    background-color: #2A2F85;
+    cursor: pointer;
+}
 
-    .topbar > .menu-button > span {
-        padding: 20px;
-        color: #FFFDFF;
-        font-size: 40px;
-    }
+.topbar > .menu-button > span {
+    padding: 20px;
+    color: #FFFDFF;
+    font-size: 40px;
+}
 
-    .topbar h1 {
-        color: #FFFDFF;
-        margin: 20px;
-        white-space: nowrap;
-    }
+.topbar h1 {
+    color: #FFFDFF;
+    margin: 20px;
+    white-space: nowrap;
+}
+
 #side-menu {
-    width: 0;
+    width: 200px;
     transition: width 1s;
     height: 100vh;
     background-color: #2A2F85;
     overflow: hidden;
+    padding-top: 30px;
 }
-    #side-menu h4 {
-        color: #FFFDFF;
-        text-align: center;
-        margin-top: 0;
-    }
-    #side-menu > div {
-        display: flex;
-        padding-left: 30px;
-        padding-right: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-        #side-menu > div > span {
-            font-size: 20px;
-            color: #FFFDFF;
-            padding-right: 10px;
-        }
 
-    .side-menu-active {
-        width: 200px !important;
-    }
+#side-menu h4 {
+    color: #FFFDFF;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#side-menu > a {
+    display: flex;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#side-menu > a > span {
+    font-size: 20px;
+    color: #FFFDFF;
+    padding-right: 10px;
+}
+
+.side-menu-active { width: 0 !important; }
+
+.side-menu-item { cursor: pointer; }
+
+.side-menu-item:hover { background-color: #4348A9; }
 
 .btn-primary,
 .btn-primary:hover,

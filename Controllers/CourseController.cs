@@ -31,13 +31,13 @@ namespace College_Management_System.Controllers
         {
             if (id == null)
             {
-                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
             }
 
             var course = courseRepository.GetById(id.GetValueOrDefault());
             if (course == null)
             {
-                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
             }
 
             ViewBag.Course = course;
@@ -103,7 +103,7 @@ namespace College_Management_System.Controllers
             return Json(new {success = false});
         }
 
-        // PUT Course/UpdateCourse
+        // POST Course/UpdateCourse
         public JsonResult UpdateCourse(Course course)
         {
             if (course != null)
@@ -117,7 +117,7 @@ namespace College_Management_System.Controllers
             return Json(new {success = false});
         }
 
-        // DELETE Course/DeleteCourse
+        // POST Course/DeleteCourse
         public JsonResult DeleteCourse(Course course)
         {
             if (course != null)
@@ -125,7 +125,6 @@ namespace College_Management_System.Controllers
                 var currentCourse = courseRepository.GetById(course.Id);
                 if (currentCourse != null)
                 {
-      
                     courseRepository.Delete(currentCourse);
                     unitOfWork.SaveChanges();
                 }

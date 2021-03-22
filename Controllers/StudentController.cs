@@ -37,7 +37,7 @@ namespace College_Management_System.Controllers
 
         // POST Student/CreateStudent
         public JsonResult CreateStudent(StudentDto student)
-        { 
+        {
             if (student != null)
             {
                 studentRepository.Add(student.ToNewStudent());
@@ -45,7 +45,8 @@ namespace College_Management_System.Controllers
 
                 return Json(new {success = true});
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // POST Student/UpdateStudent
@@ -63,10 +64,11 @@ namespace College_Management_System.Controllers
                     studentRepository.Edit(currentStudent);
                     unitOfWork.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // POST Student/DeleteStudent
@@ -80,10 +82,11 @@ namespace College_Management_System.Controllers
                     userRepository.Delete(currentStudent.User);
                     unitOfWork.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
     }
 }

@@ -14,18 +14,10 @@ namespace College_Management_System.Models
     
     public partial class Student
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
-        {
-            this.SubjectStudents = new HashSet<SubjectStudent>();
-        }
-    
         public int Id { get; set; }
         public int UserId { get; set; }
         public Nullable<int> RegistrationNumber { get; set; }
     
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubjectStudent> SubjectStudents { get; set; }
     }
 }

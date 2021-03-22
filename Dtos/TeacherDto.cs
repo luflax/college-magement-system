@@ -18,6 +18,11 @@ namespace College_Management_System.Dtos
     {
         public static TeacherDto ToTeacherDto(this Teacher teacher)
         {
+            if (teacher == null)
+            {
+                return new TeacherDto { };
+            }
+
             return new TeacherDto
             {
                 Id = teacher.Id,

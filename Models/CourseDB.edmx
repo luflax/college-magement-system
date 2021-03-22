@@ -96,7 +96,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SubjectSt__Stude__6477ECF3">
+        <Association Name="FK__SubjectSt__Stude__4F7CD00D">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="SubjectStudent" Type="Self.SubjectStudent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -108,8 +108,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SubjectSt__Subje__6383C8BA">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+        <Association Name="FK__SubjectSt__Subje__4E88ABD4">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubjectStudent" Type="Self.SubjectStudent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
@@ -153,11 +155,11 @@
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Subject" EntitySet="Subject" />
           </AssociationSet>
-          <AssociationSet Name="FK__SubjectSt__Stude__6477ECF3" Association="Self.FK__SubjectSt__Stude__6477ECF3">
+          <AssociationSet Name="FK__SubjectSt__Stude__4F7CD00D" Association="Self.FK__SubjectSt__Stude__4F7CD00D">
             <End Role="Student" EntitySet="Student" />
             <End Role="SubjectStudent" EntitySet="SubjectStudent" />
           </AssociationSet>
-          <AssociationSet Name="FK__SubjectSt__Subje__6383C8BA" Association="Self.FK__SubjectSt__Subje__6383C8BA">
+          <AssociationSet Name="FK__SubjectSt__Subje__4E88ABD4" Association="Self.FK__SubjectSt__Subje__4E88ABD4">
             <End Role="Subject" EntitySet="Subject" />
             <End Role="SubjectStudent" EntitySet="SubjectStudent" />
           </AssociationSet>
@@ -247,7 +249,6 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RegistrationNumber" Type="Int32" />
           <NavigationProperty Name="User" Relationship="LDBModel.FK__Student__UserId__5441852A" FromRole="Student" ToRole="User" />
-          <NavigationProperty Name="SubjectStudents" Relationship="LDBModel.FK__SubjectSt__Stude__6477ECF3" FromRole="Student" ToRole="SubjectStudent" />
         </EntityType>
         <EntityType Name="SubjectStudent">
           <Key>

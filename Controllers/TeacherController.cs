@@ -36,9 +36,8 @@ namespace College_Management_System.Controllers
         }
 
         // POST Teacher/CreateTeacher
-        [HttpPost]
         public JsonResult CreateTeacher(TeacherDto teacher)
-        { 
+        {
             if (teacher != null)
             {
                 teacherRepository.Add(teacher.ToTeacher());
@@ -46,7 +45,8 @@ namespace College_Management_System.Controllers
 
                 return Json(new {success = true});
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // POST Teacher/UpdateTeacher
@@ -64,10 +64,11 @@ namespace College_Management_System.Controllers
                     teacherRepository.Edit(currentTeacher);
                     unitOfWork.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // POST Teacher/DeleteTeacher
@@ -81,10 +82,11 @@ namespace College_Management_System.Controllers
                     userRepository.Delete(currentTeacher.User);
                     unitOfWork.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
     }
 }

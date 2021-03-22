@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[SubjectStudent] (
 	[Grade] INT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
 	FOREIGN KEY ([SubjectId]) 
-        REFERENCES [dbo].[Subject] ([Id]) ON DELETE CASCADE,
+        REFERENCES [dbo].[Subject] ([Id]) ON DELETE SET NULL,
 	FOREIGN KEY ([StudentId]) 
-        REFERENCES [dbo].[Student] ([Id])
+        REFERENCES [dbo].[Student] ([Id]) ON DELETE SET NULL
 )

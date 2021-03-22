@@ -19,18 +19,18 @@
     </header>
     <main style="display: flex">
         <div id="side-menu">
-            <div>
-                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-                <h4>Teachers</h4>
-            </div>
-            <div>
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <h4>Students</h4>
-            </div>
-            <div>
+            <a class="side-menu-item" href="/Course/Index">
                 <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                 <h4>Courses</h4>
-            </div>
+            </a>
+            <a class="side-menu-item" href="/Teacher/Index">
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                <h4>Teachers</h4>
+            </a>
+            <a class="side-menu-item" href="/Student/Index">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <h4>Students</h4>
+            </a>
         </div>
         <div>
             @RenderBody()
