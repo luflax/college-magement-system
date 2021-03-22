@@ -1,0 +1,36 @@
+﻿<div class="container courses-body" ng-controller="viewSubjectController">
+    <div class="courses-header">
+        <h2>@ViewBag.Subject.Name</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">
+            Add Student
+        </button>
+    </div>
+    <h4>Teacher</h4>
+    <div class="teacher-info">
+        <span>Name: @ViewBag.Subject.Teacher.Name</span>
+        <span>BirthDay: @ViewBag.Subject.Teacher.BirthDay</span>
+        <span>Salary: €@ViewBag.Subject.Teacher.Salary</span>
+    </div>
+    <h4>Students</h4>
+    <table class="table courses-table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Reg. Number</th>
+                <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+
+</div>
+
+@section scripts
+{
+    <script src="~/App/Module.js"></script>
+    <script src="~/App/ViewSubject/Service.js"></script>
+    <script src="~/App/ViewSubject/Controller.js"></script>
+}

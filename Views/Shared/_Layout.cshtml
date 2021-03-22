@@ -6,19 +6,53 @@
     <title>@ViewBag.Title - College Management System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body ng-app="courses">
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body ng-app="collegeManagementApp">
+    <header class="topbar">
+        <div class="menu-button" onclick="changeSideMenuState()">
+            <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+        </div>
+        <div>
+            <h1>College management system</h1>
+        </div>
+    </header>
+    <main style="display: flex">
+        <div id="side-menu">
+            <div>
+                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                <h4>Teachers</h4>
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <h4>Students</h4>
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                <h4>Courses</h4>
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+    </main>
     @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            jQuery.noConflict();
+        });
+
+        function changeSideMenuState(e) {
+            var sideMenuEl = document.getElementById('side-menu');
+            if (sideMenuEl.classList.contains('side-menu-active')) {
+                sideMenuEl.classList.remove('side-menu-active');
+            } else {
+                sideMenuEl.classList.add('side-menu-active');
+            }
+
+        }
+    </script>
 </body>
 </html>

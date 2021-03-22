@@ -141,7 +141,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Dtos\SubjectDto.cs" />
+    <Compile Include="Dtos\SubjectOverviewDto.cs" />
+    <Compile Include="Dtos\CourseDto.cs" />
+    <Compile Include="Dtos\TeacherDto.cs" />
+    <Compile Include="Dtos\StudentDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,8 +196,16 @@
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\ViewSubject\Controller.js" />
+    <Content Include="App\ViewSubject\Service.js" />
+    <Content Include="App\ViewCourse\Controller.js" />
+    <Content Include="App\ViewCourse\Service.js" />
+    <Content Include="App\Teacher\Controller.js" />
+    <Content Include="App\Teacher\Service.js" />
+    <Content Include="App\Student\Controller.js" />
+    <Content Include="App\Student\Service.js" />
     <Content Include="App\Course\Controller.js" />
-    <Content Include="App\Course\Module.js" />
+    <Content Include="App\Module.js" />
     <Content Include="App\Course\Service.js" />
     <Content Include="App_Data\LDB.mdf" />
     <Content Include="App_Data\LDB_log.ldf">
@@ -199,6 +215,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Teacher.css" />
+    <Content Include="Content\Student.css" />
+    <Content Include="Content\Course.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -249,10 +268,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Course\ViewCourse.cshtml" />
+    <Content Include="Views\Subject\ViewSubject.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -289,7 +309,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3036</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44385/</IISUrl>
+          <IISUrl>http://localhost:44385/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

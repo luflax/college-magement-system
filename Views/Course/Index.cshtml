@@ -1,13 +1,58 @@
-﻿<div class="container" ng-controller="courseController">
-    <div ng-repeat="course in Courses">
-        <span>{{course.Id}}</span>
-        <span>{{course.Name}}</span>
+﻿<div class="container courses-body" ng-controller="courseController">
+    <div class="courses-header">
+        <h2>Courses</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal">
+            Add
+        </button>
+    </div>
+    <table class="table courses-table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Teachers</th>
+            <th scope="col">Students</th>
+            <th scope="col">Grade Average</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="course in Courses">
+            <th><a href="/Course/ViewCourse/{{course.Id}}">{{course.Name}}</a></th>
+            <th>{{course.TeachersCount}}</th>
+            <th>{{course.StudentsCount}}</th>
+            <th>{{course.GradeAverage}}</th>
+            <th>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteCourse(course.Id)"></span>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+    
+    <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle">Add new course</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="input-course-name">Name</label>
+                    <input type="text" class="form-control" id="input-course-name" placeholder="Enter course name" ng-model="course.name" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addCourse()">Create</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @section scripts
 {
-    <script src="~/App/Course/Module.js"></script>
+    <script src="~/App/Module.js"></script>
     <script src="~/App/Course/Service.js"></script>
     <script src="~/App/Course/Controller.js"></script>
 }

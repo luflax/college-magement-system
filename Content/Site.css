@@ -1,9 +1,11 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    font-family: 'Roboto';
 }
 
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -12,13 +14,70 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
+.dl-horizontal dt { white-space: normal; }
 
 /* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
-textarea {
-    max-width: 280px;
+textarea { max-width: 280px; }
+
+.topbar {
+    display: flex;
+    background-color: #191F72;
+}
+
+    .topbar .menu-button {
+        background-color: #2A2F85;
+        cursor: pointer;
+    }
+
+    .topbar > .menu-button > span {
+        padding: 20px;
+        color: #FFFDFF;
+        font-size: 40px;
+    }
+
+    .topbar h1 {
+        color: #FFFDFF;
+        margin: 20px;
+        white-space: nowrap;
+    }
+#side-menu {
+    width: 0;
+    transition: width 1s;
+    height: 100vh;
+    background-color: #2A2F85;
+    overflow: hidden;
+}
+    #side-menu h4 {
+        color: #FFFDFF;
+        text-align: center;
+        margin-top: 0;
+    }
+    #side-menu > div {
+        display: flex;
+        padding-left: 30px;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+        #side-menu > div > span {
+            font-size: 20px;
+            color: #FFFDFF;
+            padding-right: 10px;
+        }
+
+    .side-menu-active {
+        width: 200px !important;
+    }
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #A40A9B !important;
+    border-color: #A40A9B !important;
 }

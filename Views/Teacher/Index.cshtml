@@ -1,0 +1,60 @@
+﻿<div class="container teachers-body" ng-controller="teacherController">
+    <div class="teachers-header">
+        <h2>Teachers</h2>
+        <button type="button" class="btn btn-primary" ng-click="openNewModal()">
+            Add
+        </button>
+    </div>
+    <table class="table teachers-table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">BirthDay</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="teacher in Teachers">
+            <th><a ng-click="openEditModal(teacher)">{{teacher.Name}}</a></th>
+            <th>{{teacher.BirthDay}}</th>
+            <th>{{teacher.Salary}}</th>
+            <th>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteTeacher(teacher.Id)"></span>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle">{{modalTitle}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="input-teacher-name">Name</label>
+                    <input type="text" class="form-control" id="input-teacher-name" placeholder="Enter teacher name" ng-model="teacher.Name" required>
+                    <label for="input-teacher-birthday">Birthday</label>
+                    <input type="date" class="form-control" id="input-teacher-birthday" placeholder="Enter teacher birthday" ng-model="teacher.BirthDay" required>
+                    <label for="input-teacher-salary">Salary</label>
+                    <input type="number" class="form-control" id="input-teacher-salary" placeholder="Enter teacher salary" ng-model="teacher.Salary" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="onModalSave()">{{modalButtonText}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/App/Module.js"></script>
+    <script src="~/App/Teacher/Service.js"></script>
+    <script src="~/App/Teacher/Controller.js"></script>
+}

@@ -1,10 +1,7 @@
-﻿using College_Management_System.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using College_Management_System.Dtos;
+using College_Management_System.Models;
 using College_Management_System.Repositories;
 using College_Management_System.UnitOfWork;
 
@@ -14,11 +11,13 @@ namespace College_Management_System.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Course> courseRepository;
+        private readonly IRepository<Subject> subjectRepository;
 
         public CourseController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            this.courseRepository = unitOfWork.GetRepository<Course>();
+            courseRepository = unitOfWork.GetRepository<Course>();
+            subjectRepository = unitOfWork.GetRepository<Subject>();
         }
 
         // GET Course/Index
@@ -27,16 +26,72 @@ namespace College_Management_System.Controllers
             return View();
         }
 
-        // GET Course/GetCourse
-        public JsonResult GetCourse()
+        // GET Course/ViewCourse/Id
+        public ActionResult ViewCourse(int? id)
         {
+            if (id == null)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            var course = courseRepository.GetById(id.GetValueOrDefault());
+            if (course == null)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            ViewBag.Course = course;
+            return View();
+        }
+
+        // GET Course/GetCourses
+        [HttpGet]
+        public JsonResult GetCourses()
+        {
+            // Retrieves all courses
             var courses = courseRepository.GetAll();
-            return Json(courses, JsonRequestBehavior.AllowGet);
+
+            // Maps course entities to DTO
+            var coursesDto = courses.Select(course =>
+            {
+                // Gets course's subjects
+                var subjects = subjectRepository.GetMany(e => e.CourseId == course.Id).ToList();
+
+                // Calculates average grade for each subject
+                var gradesSums = subjects.Select(e =>
+                {
+                    var studentsGrades = e.SubjectStudents.Where(student => student.Grade != null);
+                    if (!studentsGrades.Any())
+                    {
+                        return 0;
+                    }
+
+                    var gradesSum =
+                        studentsGrades.Aggregate(0, (a, student) => a += (int) student.Grade);
+                    return gradesSum / studentsGrades.Count();
+                });
+
+                var courseDto = course.ToCourseDto();
+                // Sums subject's students count
+                courseDto.StudentsCount = subjects.Aggregate(0, (i, subject) => subject.SubjectStudents.Count());
+
+                // Counts subjects with an assigned teacher
+                courseDto.TeachersCount = subjects.Select(e => e.Teacher != null).Count();
+
+                // Sums all grades sums retrieved before and calculate the average
+                courseDto.GradeAverage =
+                    gradesSums.Any() ? gradesSums.Aggregate(0, (a, v) => a += v) / gradesSums.Count() : 0;
+
+                return courseDto;
+            }).ToList();
+
+            return Json(coursesDto, JsonRequestBehavior.AllowGet);
         }
 
         // POST Course/CreateCourse
+        [HttpPost]
         public JsonResult CreateCourse(Course course)
-        { 
+        {
             if (course != null)
             {
                 courseRepository.Add(course);
@@ -44,7 +99,8 @@ namespace College_Management_System.Controllers
 
                 return Json(new {success = true});
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // PUT Course/UpdateCourse
@@ -55,9 +111,10 @@ namespace College_Management_System.Controllers
                 courseRepository.Edit(course);
                 unitOfWork.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(new {success = true});
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
 
         // DELETE Course/DeleteCourse
@@ -65,12 +122,18 @@ namespace College_Management_System.Controllers
         {
             if (course != null)
             {
-                courseRepository.Delete(course);
-                unitOfWork.SaveChanges();
+                var currentCourse = courseRepository.GetById(course.Id);
+                if (currentCourse != null)
+                {
+      
+                    courseRepository.Delete(currentCourse);
+                    unitOfWork.SaveChanges();
+                }
 
-                return Json(new { success = true });
+                return Json(new {success = true});
             }
-            return Json(new { success = false });
+
+            return Json(new {success = false});
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿.courses-body {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.courses-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.courses-header>h2 {
+    margin-top: 0;
+}
+
+.courses-table .glyphicon-trash {
+    color: #CD3E3E;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.teacher-info>span{
+    padding-right: 10px;
+}
+
+.teacher-info {
+    margin-bottom: 30px;
+}

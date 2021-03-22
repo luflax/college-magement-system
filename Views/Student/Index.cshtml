@@ -1,0 +1,60 @@
+﻿<div class="container students-body" ng-controller="studentController">
+    <div class="students-header">
+        <h2>Students</h2>
+        <button type="button" class="btn btn-primary" ng-click="openNewModal()">
+            Add
+        </button>
+    </div>
+    <table class="table students-table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">BirthDay</th>
+                <th scope="col">Reg. Number</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in Students">
+                <th><a ng-click="openEditModal(student)">{{student.Name}}</a></th>
+                <th>{{student.BirthDay}}</th>
+                <th>{{student.RegistrationNumber}}</th>
+                <th>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteStudent(student.Id)"></span>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle">{{modalTitle}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="input-student-name">Name</label>
+                    <input type="text" class="form-control" id="input-student-name" placeholder="Enter student name" ng-model="student.Name" required>
+                    <label for="input-student-birthday">Birthday</label>
+                    <input type="date" class="form-control" id="input-student-birthday" placeholder="Enter student birthday" ng-model="student.BirthDay" required>
+                    <label for="input-student-registrationNumber">Registration number</label>
+                    <input type="number" class="form-control" id="input-student-registrationNumber" placeholder="Enter student registration number" ng-model="student.RegistrationNumber" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="studentModalSaveBtn" ng-click="onModalSave()">{{modalButtonText}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/App/Module.js"></script>
+    <script src="~/App/Student/Service.js"></script>
+    <script src="~/App/Student/Controller.js"></script>
+}

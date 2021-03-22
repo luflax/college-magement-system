@@ -1,0 +1,19 @@
+﻿.students-body {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.students-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.students-header>h2 {
+    margin-top: 0;
+}
+
+.students-table .glyphicon-trash {
+    color: #CD3E3E;
+    cursor: pointer;
+    font-size: 20px;
+}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using College_Management_System.Models;
 
@@ -21,6 +22,16 @@ namespace College_Management_System.Repositories
         public List<T> GetAll()
         {
             return dbSet.ToList();
+        }
+
+        public T Get(Expression<Func<T, bool>> where)
+        {
+            return dbSet.Where(where).FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
+        {
+            return dbSet.Where(where).ToList();
         }
 
         public T GetById(int id)
